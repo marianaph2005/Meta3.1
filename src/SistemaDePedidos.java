@@ -9,7 +9,8 @@ public class SistemaDePedidos {
     }
 
     public void recibirPedido(String mesa, String pedidoId, List<String> items) {
-        System.out.println("[PEDIDOS] Recibiendo pedido de " + mesa);
+        System.out.println("[SISTEMA DE PEDIDOS] Nueva orden de " + mesa + " | Pedido: " + pedidoId + " | Ítems: " + items);
+
         bus.publicar(new PedidoRealizadoEvent(mesa, pedidoId, items));
     }
 }

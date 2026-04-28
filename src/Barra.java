@@ -14,7 +14,9 @@ public class Barra implements Subscriber {
             PedidoRealizadoEvent pedido = (PedidoRealizadoEvent) event;
             for (String item : pedido.items) {
                 if (item.toLowerCase().contains("cerveza") || item.toLowerCase().contains("bebida")) {
-                    // Simulamos preparación asíncrona para no bloquear el bus
+
+                    System.out.println("[BARRA] Se recibió la orden de la " + pedido.mesaId + ". Preparando: " + item + " (Tomará 2 segundos...)");
+
                     new Thread(() -> {
                         try {
                             Thread.sleep(2000); // 2 segundos

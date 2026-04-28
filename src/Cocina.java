@@ -14,6 +14,9 @@ public class Cocina implements Subscriber {
             PedidoRealizadoEvent pedido = (PedidoRealizadoEvent) event;
             for (String item : pedido.items) {
                 if (item.toLowerCase().contains("hamburguesa") || item.toLowerCase().contains("comida")) {
+
+                    System.out.println("[COCINA] Se recibió la orden del pedido " + pedido.pedidoId + ". Cocinando: " + item + " (Tomará 5 segundos...)");
+
                     new Thread(() -> {
                         try {
                             Thread.sleep(5000); // 5 segundos
