@@ -1,13 +1,34 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+import java.util.Arrays;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+public class Main {
+    public static void main(String[] args) {
+        // 1 - Inicializar el Event Bus
+        EventBus bus = new EventBus();
+
+        // 2 - Inicializar los Componentes (Se suscriben internamente)
+        Barra barra = new Barra(bus);
+        Cocina cocina = new Cocina(bus);
+        PanelLED panel = new PanelLED(bus);
+        SistemaDeSonido sonido = new SistemaDeSonido(bus);
+        SistemaDePedidos pedidos = new SistemaDePedidos(bus);
+        Banda banda = new Banda(bus);
+
+        // 3 - Simular el flujo
+        System.out.println("--- Iniciando Taberna del Gólem Alquímico ---\n");
+
+        // Pedido de comida y bebida
+        pedidos.recibirPedido("Mesa 5", "pedido123", Arrays.asList("1 Cerveza", "1 Hamburguesa"));
+
+        // La banda toca música en paralelo
+        banda.tocarCancion("Los Seguidores de Dijkstra", "El Algoritmo del Amor", 180);
+
+        // el hilo principal espera un poco para que los hilos de Barra y Cocina terminen de imprimir
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("\n--- Fin Simulación---");
     }
 }
