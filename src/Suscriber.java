@@ -1,4 +1,3 @@
-package PACKAGE_NAME;
-
-public class Suscriber {
+public interface Subscriber {
+    void onEvent(Object event);
 }
