@@ -10,6 +10,7 @@ public class Main {
         Cocina cocina = new Cocina(bus);
         PanelLED panel = new PanelLED(bus);
         SistemaDeSonido sonido = new SistemaDeSonido(bus);
+        SistemaDeHumo humo = new SistemaDeHumo(bus);
         SistemaDePedidos pedidos = new SistemaDePedidos(bus);
         Banda banda = new Banda(bus);
 
@@ -21,6 +22,7 @@ public class Main {
 
         // La banda toca música en paralelo
         banda.tocarCancion("Los Seguidores de Dijkstra", "El Algoritmo del Amor", 180);
+        banda.tocarCancion("DragonForce", "Through the Fire and Flames", 450);
 
         // el hilo principal espera un poco para que los hilos de Barra y Cocina terminen de imprimir
         try {

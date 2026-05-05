@@ -1,11 +1,12 @@
 import java.util.*;
+import java.util.concurrent.*;
 
 public class EventBus {
     // Mapa que relaciona un tipo de evento con la lista de Suscriptores interesados
-    private final Map<Class<?>, List<Subscriber>> suscriptores = new HashMap<>();
+    private final Map<Class<?>, List<Subscriber>> suscriptores = new ConcurrentHashMap<>();
 
     public void suscribir(Class<?> tipoDeEvento, Subscriber suscriptor) {
-        suscriptores.computeIfAbsent(tipoDeEvento, k -> new ArrayList<>()).add(suscriptor);
+        suscriptores.computeIfAbsent(tipoDeEvento, k -> new CopyOnWriteArrayList<>()).add(suscriptor);
     }
 
     public void desuscribir(Class<?> tipoDeEvento, Subscriber suscriptor) {
